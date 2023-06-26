@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="main">
+    <div id="side">
+      <h4>Deep VScode</h4>
+      <div id="line"></div>
+      <div class="fileicon">
+        <h5>Folder Name</h5>
+        <div class="icons">
+          <i id="filecreate" class="ri-file-add-fill"></i>
+          <i id="foldercreate" class="ri-folder-add-fill"></i>
+          <i class="ri-refresh-fill"></i>
+        </div>
+      </div>
+
+      <form class="formcreation" id="fileform" action="/filecreate">
+        <input name="filename" type="text" placeholder="filename">
+      </form>
+
+      <form class="formcreation" id="folderform" action="foldercreate">
+        <input name="foldername" type="text" placeholder="foldername">
+      </form>
+
+      <div class="files">
+        <% files.forEach(function(elem){ %>
+          <h5 class="file">
+            <% if(elem.isDirectory()){ %>
+              <i class="ri-folder-fill"></i>
+              <% } else { %>
+                <i class="ri-file-text-line"></i>
+                <% } %>
+                <% if(elem.isDirectory()){ %>
+                  <%=elem.name %>
+                  <% }  else { %>
+                    <a href="/file/<%= elem.name %>"><%= elem.name %></a>
+                 <% } %>
+                
+          </h5>
+          <% }) %>
+      </div>
+    </div>
+    <div id="right">
+  <small>nothing</small>
+      <!-- <div id="rightnav">
+        <div class="openedfile">
+          <%= filename %>
+          <i class="ri-close-circle-fill"></i>
+        </div>
+      </div>
+      <form action="" method="post">
+        <textarea><%= filedata %></textarea>
+        <input id="buttonsave" type="submit" value="SaveFile">
+      </form> -->
+
+      <!-- <small><strike>NOTHING HERE</strike></small> -->
+    </div>
+  </div>
+
+
+
+
+  <script>
+    function turnoffboth() {
+      document.querySelectorAll(".formcreation")
+        .forEach(function (elem) {
+          elem.style.display = 'none';
+        })
+    }
+
+
+    var filecreateicon = document.querySelector("#filecreate")
+    filecreateicon.addEventListener("click", function () {
+      turnoffboth();
+      document.querySelector("#fileform").style.display = "initial";
+    })
+    var foldercreateicon = document.querySelector("#foldercreate")
+    foldercreateicon.addEventListener("click", function () {
+      turnoffboth();
+      document.querySelector("#folderform").style.display = "initial";
+    })
+  </script>
+</body>
+
+</html>
